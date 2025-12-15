@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Impressum – TakeOne</title>
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/takeOnelogo.png" />
+  <link rel="shortcut icon" type="image/png" href="assets/takeOnelogo.png" />
+
+  <style>
+    :root{
+      --bg:#f9fafb;
+      --fg:#0f172a;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --header:rgba(249,250,251,0.96);
+      --shadow:0 18px 50px rgba(15,23,42,.12);
+      --font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+
+    html{
+      scroll-behavior:smooth;
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+    }
+
+    body{
+      font-family:var(--font);
+      color:var(--fg);
+      background:var(--bg);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .container{
+      width:min(900px,calc(100% - 2rem));
+      margin-inline:auto;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:30;
+      background:var(--header);
+      border-bottom:1px solid rgba(209,213,219,1);
+      box-shadow:0 10px 30px rgba(15,23,42,.08);
+      backdrop-filter:saturate(160%) blur(18px);
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:.75rem 0;
+    }
+
+    .brand{
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:.95rem;
+    }
+
+    .menu{
+      display:flex;
+      gap:1.2rem;
+      align-items:center;
+      position:relative;
+    }
+
+    .menu a{
+      font-weight:700;
+      font-size:.78rem;
+      padding:.35rem .55rem;
+      border-radius:999px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:#0f172a;
+      transition:background .18s ease;
+    }
+
+    .menu a:hover{
+      background:rgba(15,23,42,0.06);
+    }
+
+    .menu-item{position:relative;}
+    .menu-trigger{display:inline-flex;align-items:center;gap:.25rem;}
+
+    .menu-dropdown{
+      position:absolute;
+      top:100%;
+      right:0;
+      background:#ffffff;
+      border:1px solid rgba(229,231,235,1);
+      border-radius:16px;
+      box-shadow:0 18px 40px rgba(15,23,42,.2);
+      display:flex;
+      flex-direction:column;
+      min-width:180px;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(-6px);
+      transition:opacity .18s ease, transform .18s ease;
+      z-index:20;
+    }
+
+    .menu-dropdown a{
+      border-radius:0;
+      border-bottom:1px solid rgba(229,231,235,1);
+      padding:.65rem 1rem;
+      text-align:left;
+      background:transparent;
+      white-space:nowrap;
+    }
+    .menu-dropdown a:last-child{border-bottom:none;}
+
+    .menu-item:hover .menu-dropdown{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+
+    main{flex:1;padding:4rem 0;}
+
+    .imprint-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:28px;
+      padding:3rem;
+      box-shadow:var(--shadow);
+    }
+
+    h1{
+      font-size:2.2rem;
+      font-weight:900;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      margin-bottom:1.8rem;
+      text-align:center;
+    }
+
+    .section{margin-bottom:2rem;}
+
+    .section h2{
+      font-size:1rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-weight:800;
+      margin-bottom:.4rem;
+    }
+
+    .section p{
+      color:var(--muted);
+      line-height:1.7;
+      font-size:1rem;
+    }
+
+    footer{
+      padding:1rem 0;
+      text-align:center;
+      color:var(--muted);
+      border-top:1px solid var(--border);
+      background:#e5e7eb;
+    }
+
+    @media(max-width:640px){
+      .nav{flex-direction:column;gap:.5rem;}
+      .menu{flex-wrap:wrap;justify-content:center;}
+      .imprint-card{padding:2rem 1.4rem;}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html">TAKEONE</a>
+      <nav class="menu">
+        <a href="index.html#work">Projekte</a>
+        <a href="index.html#about">Über uns</a>
+        <div class="menu-item">
+          <a class="menu-trigger" href="kontakt.html">Kontakt</a>
+          <div class="menu-dropdown" role="menu">
+            <a href="impressum.html">Impressum</a>
+            <a href="datenschutz.html">Datenschutz</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <article class="imprint-card">
+        <h1>Impressum</h1>
+
+        <section class="section">
+          <h2>Angaben gemäß § 5 TMG</h2>
+          <p>
+            TakeOne<br />
+            Gemeinschaftliches Portfolio- und Galerieprojekt<br />
+            Verantwortlich für den Inhalt (gemäß § 18 Abs. 2 MStV):<br />
+            David Jascha Bals<br />
+            Ramón Wolber
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Anschrift</h2>
+          <p>
+            David Jascha Bals<br />
+            Sasendorf 5<br />
+            29549 Bad Bevensen<br />
+            Deutschland<br /><br />
+            Ramón Wolber<br />
+            Wilhelmsruher Damm 154<br />
+            13439 Berlin<br />
+            Deutschland
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Kontakt</h2>
+          <p>
+            E-Mail (David): <span id="email-david">davidjbals [at] gmail [dot] com</span><br />
+            E-Mail (Ramón): <span id="email-ramon">ramonx662 [at] gmail [dot] com</span>
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Hinweis</h2>
+          <p>
+            Diese Website dient ausschließlich der Präsentation ausgewählter Arbeiten und Projekte.
+            Über diese Seite werden keine Dienstleistungen angeboten und keine Aufträge akquiriert.
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Haftung für Inhalte</h2>
+          <p>
+            Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.
+            Nach §§ 8 bis 10 TMG sind wir jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+            Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Haftung für Links</h2>
+          <p>
+            Diese Website enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben.
+            Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
+            Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+            Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Urheberrecht</h2>
+          <p>
+            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
+            Beiträge Dritter sind als solche gekennzeichnet, soweit dies möglich ist.
+            Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung der jeweiligen Urheberinnen und Urheber.
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Datenschutz</h2>
+          <p>
+            Informationen zur Verarbeitung personenbezogener Daten findest du in unserer
+            <a href="datenschutz.html" style="text-decoration:underline;">Datenschutzerklärung</a>.
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Stand</h2>
+          <p>Zuletzt aktualisiert: <span id="imprint-date"></span></p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year"></span> TakeOne • <a href="impressum.html">Impressum</a> • <a href="datenschutz.html">Datenschutz</a>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('imprint-date').textContent = new Date().toLocaleDateString('de-DE');
+
+    // E-Mails im HTML nicht als vollständige Adresse; Aufbau erst im JS
+    (function(){
+      function makeMail(id, user, domain){
+        const el = document.getElementById(id);
+        if(!el) return;
+        const addr = user + "@" + domain;
+        const a = document.createElement("a");
+        a.href = "mailto:" + addr;
+        a.textContent = addr;
+        el.textContent = "";
+        el.appendChild(a);
+      }
+
+      makeMail("email-david","davidjbals","gmail.com");
+      makeMail("email-ramon","ramonx662","gmail.com");
+    })();
+  </script>
+</body>
+</html>

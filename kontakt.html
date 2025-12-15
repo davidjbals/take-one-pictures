@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kontakt – TakeOne</title>
+  <meta name="color-scheme" content="light" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/takeOnelogo.png" />
+  <link rel="shortcut icon" type="image/png" href="assets/takeOnelogo.png" />
+
+  <style>
+    :root {
+      --bg:#f9fafb;
+      --fg:#0f172a;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --header:rgba(249,250,251,0.96);
+      --shadow:0 18px 50px rgba(15,23,42,.12);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+
+    html{
+      scroll-behavior:smooth;
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+    }
+
+    body{
+      font-family:var(--font);
+      color:var(--fg);
+      background:var(--bg);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .container{width:min(900px,calc(100% - 2rem));margin-inline:auto;}
+
+    header{
+      position:sticky;top:0;
+      z-index:30;
+      background:var(--header);
+      border-bottom:1px solid rgba(209,213,219,1);
+      box-shadow:0 10px 30px rgba(15,23,42,.08);
+      backdrop-filter:saturate(160%) blur(18px);
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:.7rem 0;
+    }
+
+    .brand{
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:.95rem;
+      color:#0f172a;
+    }
+
+    .menu{display:flex;gap:1.2rem;align-items:center;position:relative}
+    .menu a{
+      font-weight:700;
+      font-size:.78rem;
+      padding:.35rem .55rem;
+      border-radius:999px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:#0f172a;
+      transition:background .18s ease, color .18s ease;
+    }
+    .menu a:hover{background:rgba(15,23,42,0.06);}
+
+    .menu-item{position:relative;}
+    .menu-trigger{
+      display:inline-flex;
+      align-items:center;
+      gap:.25rem;
+    }
+
+    .menu-dropdown{
+      position:absolute;
+      top:100%;
+      right:0;
+      background:#ffffff;
+      border:1px solid rgba(229,231,235,1);
+      border-radius:16px;
+      box-shadow:0 18px 40px rgba(15,23,42,.2);
+      display:flex;
+      flex-direction:column;
+      min-width:180px;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(-6px);
+      transition:opacity .18s ease, transform .18s ease;
+      z-index:20;
+    }
+
+    .menu-dropdown a{
+      border-radius:0;
+      border-bottom:1px solid rgba(229,231,235,1);
+      padding:.65rem 1rem;
+      text-align:left;
+      background:transparent;
+      white-space:nowrap;
+    }
+    .menu-dropdown a:last-child{border-bottom:none;}
+
+    .menu-item:hover .menu-dropdown{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+
+    main{
+      flex:1;
+      display:flex;
+      align-items:center;
+      padding:4rem 0;
+    }
+
+    .contact-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:28px;
+      padding:3rem;
+      box-shadow:var(--shadow);
+      text-align:center;
+    }
+
+    .h1{
+      font-size:2.4rem;
+      font-weight:1000;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      margin-bottom:1.4rem;
+    }
+
+    .contact-description{
+      color:var(--muted);
+      line-height:1.6;
+      margin-bottom:2rem;
+    }
+
+    .contact-list{
+      display:flex;
+      flex-direction:column;
+      gap:1.2rem;
+    }
+
+    .contact-item{
+      font-size:1rem;
+      color:var(--muted);
+    }
+
+    .contact-item span{
+      display:block;
+      font-size:.78rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-weight:700;
+      color:#0f172a;
+      margin-bottom:.2rem;
+    }
+
+    .contact-item a{
+      font-size:1.1rem;
+      font-weight:700;
+      text-decoration:underline;
+      cursor:pointer;
+    }
+
+    .note{
+      margin-top:2.2rem;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:.98rem;
+    }
+
+    footer{
+      padding:1rem 0;
+      text-align:center;
+      color:var(--muted);
+      border-top:1px solid var(--border);
+      background:#e5e7eb;
+    }
+
+    @media(max-width:640px){
+      .nav{flex-direction:column;gap:.5rem;}
+      .menu{flex-wrap:wrap;justify-content:center;}
+      .contact-card{padding:2.4rem 1.8rem;}
+      .h1{font-size:2rem;letter-spacing:.14em;}
+      .contact-item a{font-size:1rem;}
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">TAKEONE</a>
+
+    <nav class="menu">
+      <a href="index.html#work">Projekte</a>
+      <a href="index.html#about">Über uns</a>
+      <div class="menu-item">
+        <a class="menu-trigger" href="kontakt.html">Kontakt</a>
+        <div class="menu-dropdown" role="menu">
+          <a href="impressum.html">Impressum</a>
+          <a href="datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="contact-card">
+      <div class="h1">Kontakt</div>
+
+      <p class="contact-description">
+        Diese Website dient ausschließlich der Präsentation ausgewählter Arbeiten und Projekte.
+        Über diese Seite werden keine Dienstleistungen angeboten und keine Aufträge akquiriert.
+        Die nachfolgenden Angaben sind eine allgemeine Kontaktmöglichkeit.
+      </p>
+
+      <div class="contact-list">
+        <p class="contact-item">
+          <span>Email</span>
+          <a id="email-link" href="#" aria-label="E-Mail-Adresse">info [at] takeonepictures [dot] com</a>
+        </p>
+
+        <p class="contact-item">
+          <span>Instagram</span>
+          <a href="https://instagram.com/take_one_pictures_" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profil">
+            @take_one_pictures_
+          </a>
+        </p>
+      </div>
+
+      <p class="note">
+        Hinweis: Diese Seite stellt kein Angebot im rechtlichen Sinne dar. Verbindliche Angaben findest du im
+        <a href="impressum.html" style="text-decoration:underline;">Impressum</a>
+        sowie in der
+        <a href="datenschutz.html" style="text-decoration:underline;">Datenschutzerklärung</a>.
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © <span id="year"></span> David Bals • <a href="impressum.html">Impressum</a> • <a href="datenschutz.html">Datenschutz</a>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // E-Mail: echte Adresse wird erst bei Klick zusammengesetzt (kein mailto / kein @ im HTML-Source)
+  (function(){
+    const el = document.getElementById("email-link");
+    if (!el) return;
+
+    el.addEventListener("click", function (e) {
+      e.preventDefault();
+      const user = "info";
+      const domain = "takeonepictures";
+      const tld = "com";
+      const email = user + "@" + domain + "." + tld;
+      window.location.href = "mailto:" + email;
+    });
+  })();
+</script>
+
+</body>
+</html>

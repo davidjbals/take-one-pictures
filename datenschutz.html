@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Datenschutz – TakeOne</title>
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/takeOnelogo.png" />
+  <link rel="shortcut icon" type="image/png" href="assets/takeOnelogo.png" />
+
+  <style>
+    :root{
+      --bg:#f9fafb;
+      --fg:#0f172a;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --header:rgba(249,250,251,0.96);
+      --shadow:0 18px 50px rgba(15,23,42,.12);
+      --font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+
+    html{
+      scroll-behavior:smooth;
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+    }
+
+    body{
+      font-family:var(--font);
+      color:var(--fg);
+      background:var(--bg);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .container{
+      width:min(900px,calc(100% - 2rem));
+      margin-inline:auto;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:30;
+      background:var(--header);
+      border-bottom:1px solid rgba(209,213,219,1);
+      box-shadow:0 10px 30px rgba(15,23,42,.08);
+      backdrop-filter:saturate(160%) blur(18px);
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:.75rem 0;
+    }
+
+    .brand{
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:.95rem;
+    }
+
+    .menu{
+      display:flex;
+      gap:1.2rem;
+      align-items:center;
+    }
+
+    .menu a{
+      font-weight:700;
+      font-size:.78rem;
+      padding:.35rem .55rem;
+      border-radius:999px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      transition:background .18s ease;
+    }
+
+    .menu a:hover{
+      background:rgba(15,23,42,0.06);
+    }
+
+    .menu-item{position:relative;}
+
+    .menu-dropdown{
+      position:absolute;
+      top:100%;
+      right:0;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow:0 18px 40px rgba(15,23,42,.2);
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(-6px);
+      transition:.18s ease;
+      min-width:180px;
+    }
+
+    .menu-dropdown a{
+      display:block;
+      padding:.65rem 1rem;
+      border-bottom:1px solid var(--border);
+    }
+
+    .menu-dropdown a:last-child{border-bottom:none;}
+
+    .menu-item:hover .menu-dropdown{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+
+    main{flex:1;padding:4rem 0;}
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:28px;
+      padding:3rem;
+      box-shadow:var(--shadow);
+    }
+
+    h1{
+      text-align:center;
+      font-size:2.2rem;
+      font-weight:900;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      margin-bottom:2rem;
+    }
+
+    .section{margin-bottom:2rem;}
+
+    .section h2{
+      font-size:1rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-weight:800;
+      margin-bottom:.4rem;
+    }
+
+    .section p{
+      color:var(--muted);
+      line-height:1.7;
+      font-size:1rem;
+    }
+
+    footer{
+      padding:1rem 0;
+      text-align:center;
+      color:var(--muted);
+      border-top:1px solid var(--border);
+      background:#e5e7eb;
+    }
+
+    @media(max-width:640px){
+      .nav{flex-direction:column;gap:.5rem;}
+      .menu{flex-wrap:wrap;justify-content:center;}
+      .card{padding:2rem 1.4rem;}
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">TAKEONE</a>
+    <nav class="menu">
+      <a href="index.html#work">Projekte</a>
+      <a href="index.html#about">Über uns</a>
+      <div class="menu-item">
+        <a href="kontakt.html">Kontakt</a>
+        <div class="menu-dropdown">
+          <a href="impressum.html">Impressum</a>
+          <a href="datenschutz.html">Datenschutz</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <article class="card">
+      <h1>Datenschutz</h1>
+
+      <section class="section">
+        <h2>Verantwortliche</h2>
+        <p>
+          David Jascha Bals<br>
+          Sasendorf 5, 29549 Bad Bevensen<br>
+          E-Mail: <span id="email-david">davidjbals [at] gmail [dot] com</span><br><br>
+
+          Ramón Wolber<br>
+          Wilhelmsruher Damm 154, 13439 Berlin<br>
+          E-Mail: <span id="email-ramon">ramonx662 [at] gmail [dot] com</span>
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Allgemeine Hinweise</h2>
+        <p>
+          Diese Website dient ausschließlich der Präsentation ausgewählter Arbeiten und Projekte.
+          Personenbezogene Daten werden nur im technisch notwendigen Umfang verarbeitet.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Hosting</h2>
+        <p>
+          Diese Website wird über einen externen Hosting-Dienst (z. B. GitHub Pages) bereitgestellt.
+          Beim Aufruf der Seite werden automatisch Server-Logfiles erhoben.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Rechtsgrundlage</h2>
+        <p>
+          Art. 6 Abs. 1 lit. f DSGVO – berechtigtes Interesse an einem sicheren Betrieb der Website.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Cookies & Tracking</h2>
+        <p>
+          Diese Website verwendet keine Tracking- oder Marketing-Cookies.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Stand</h2>
+        <p>Zuletzt aktualisiert: <span id="date"></span></p>
+      </section>
+
+    </article>
+  </div>
+</main>
+
+<footer>
+  © <span id="year"></span> TakeOne •
+  <a href="impressum.html">Impressum</a> •
+  <a href="datenschutz.html">Datenschutz</a>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("date").textContent = new Date().toLocaleDateString("de-DE");
+
+  (function(){
+    function makeMail(id, user, domain){
+      const el = document.getElementById(id);
+      if(!el) return;
+      const addr = user + "@" + domain;
+      const a = document.createElement("a");
+      a.href = "mailto:" + addr;
+      a.textContent = addr;
+      el.textContent = "";
+      el.appendChild(a);
+    }
+
+    makeMail("email-david","davidjbals","gmail.com");
+    makeMail("email-ramon","ramonx662","gmail.com");
+  })();
+</script>
+
+</body>
+</html>
