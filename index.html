@@ -197,15 +197,25 @@
       to{ transform:rotate(360deg); }
     }
 
+    /* ===========================
+       NAV / HEADER (FIXED LAYERING)
+       =========================== */
     header{
       position:fixed;
       top:0;left:0;right:0;
-      z-index:30;
+      z-index:5000;          /* FIX: höher als Hero/Vimeo */
+      isolation:isolate;     /* FIX: saubere Stacking-Context trotz backdrop-filter */
       background:transparent;
       backdrop-filter:saturate(160%) blur(18px);
       border-bottom:none;
       box-shadow:none;
       transition:background .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    body.locked header,
+    body.locked .menu-panel{
+      opacity:0;
+      pointer-events:none;
     }
 
     .nav{
@@ -272,7 +282,16 @@
       pointer-events:none;
       transform:translateY(-6px);
       transition:opacity .18s ease, transform .18s ease;
-      z-index:40;
+      z-index:6000;          /* FIX: Dropdown immer über allem */
+    }
+
+    .menu-dropdown.is-mobile{
+      position:fixed;
+      top:auto;
+      left:auto;
+      right:auto;
+      transform:none;
+      z-index:9000;          /* FIX: Mobile Dropdown noch über Header */
     }
 
     .menu-dropdown a{
@@ -286,9 +305,18 @@
     }
 
     .menu-dropdown a:last-child{ border-bottom:none; }
-    .menu-dropdown a:hover{ background:rgba(15,23,42,0.06); }
+    .menu-dropdown a:hover{
+      background:rgba(15,23,42,0.06);
+      color:#0f172a;
+    }
 
     .menu-item:hover .menu-dropdown{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+
+    .menu-item.is-open .menu-dropdown{
       opacity:1;
       pointer-events:auto;
       transform:translateY(0);
@@ -392,6 +420,7 @@
       margin-top:0;
       padding:0;
       background:#020617;
+      z-index:0; /* FIX: hero bleibt unter header */
     }
 
     .hero::after{
@@ -458,7 +487,7 @@
     .hero-vimeo{
       position:absolute;
       inset:0;
-      z-index:0;
+      z-index:0; /* FIX: bleibt unten */
       pointer-events:none;
       overflow:hidden;
       background:#020617;
@@ -473,7 +502,7 @@
       transform:scale(1.06);
       filter:contrast(1.05) saturate(1.05);
       transition:opacity .55s ease;
-      z-index:1;
+      z-index:-1; /* FIX: Poster sicher hinter allem */
     }
 
     .hero-vimeo iframe{
@@ -485,7 +514,7 @@
       width:max(100%, calc(100vh * 16 / 9));
       height:max(100%, calc(100vw * 9 / 16));
       border:0;
-      z-index:0;
+      z-index:-2; /* FIX: Iframe immer hinter Header/Dropdown */
       opacity:0;
       transition:opacity .35s ease;
     }
@@ -582,7 +611,11 @@
       will-change:transform;
     }
 
-    .reel-slide{ flex:0 0 100%; position:relative; }
+    .reel-slide{
+      flex:0 0 100%;
+      position:relative;
+      cursor:pointer;
+    }
 
     .reel-media{
       width:100%;
@@ -618,7 +651,7 @@
       margin-top:1rem;
       display:flex;
       align-items:center;
-      justify-content:space-between;
+      justify-content:center;
       gap:1.5rem;
       font-size:.85rem;
       color:#6b7280;
@@ -629,14 +662,16 @@
       text-transform:uppercase;
       font-weight:700;
       opacity:.8;
+      text-align:center;
     }
 
     .reel-title{
-      font-size:.9rem;
+      font-size:1rem;
       color:#111827;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      text-align:center;
     }
 
     #work{
@@ -685,10 +720,9 @@
       transform:translate(-50%, -50%);
       border:0;
       display:block;
-      pointer-events:none; /* Hover bleibt auf dem Tile */
+      pointer-events:none;
     }
 
-    /* Image thumbs fill */
     .thumb-img{
       position:absolute;
       inset:0;
@@ -699,7 +733,6 @@
       pointer-events:none;
     }
 
-    /* Play Badge for Video Cards */
     .tile[data-hover-autoplay="true"] .thumb-play{
       position:absolute;
       inset:0;
@@ -710,14 +743,13 @@
       z-index:3;
     }
     .tile[data-type="vimeo"] .thumb-play{
-  opacity:0;
-  transition:opacity .18s ease;
-}
+      opacity:0;
+      transition:opacity .18s ease;
+    }
 
-.tile[data-type="vimeo"]:hover .thumb-play{
-  opacity:1;
-}
-
+    .tile[data-type="vimeo"]:hover .thumb-play{
+      opacity:1;
+    }
 
     .tile[data-hover-autoplay="true"] .thumb-play span{
       width:54px;
@@ -738,7 +770,6 @@
       transform:scale(1.03);
     }
 
-    /* Slider Arrows im Picture-Case */
     .slider-arrow{
       position:absolute;
       top:50%;
@@ -952,9 +983,26 @@
     @media(max-width:640px){
       .cards{grid-template-columns:1fr}
       .about-grid{grid-template-columns:1fr}
-      .menu-inline{display:none;}
+
+      .nav{gap:.4rem;}
+      .brand{font-size:.78rem; letter-spacing:.14em;}
+      .menu-inline{
+        gap:.7rem;
+        padding-bottom:.15rem;
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        scrollbar-width:none;
+        -webkit-overflow-scrolling:touch;
+      }
+      .menu-inline::-webkit-scrollbar{ display:none; }
+      .menu-inline a{
+        font-size:.72rem;
+        letter-spacing:.14em;
+        padding:.25rem .55rem;
+        white-space:nowrap;
+      }
       .menu-toggle{display:none;}
-      header.nav-compact .menu-toggle{display:flex;}
+      header.nav-compact .menu-toggle{display:none;}
 
       .contact-bar{flex-direction:column;gap:.3rem;}
       .modal-inner{padding:1rem;}
@@ -963,8 +1011,8 @@
 
       .reel-inner{ align-items:stretch; }
       .reel-arrow{ align-self:center; }
-      .reel-caption{ flex-direction:column; align-items:flex-start; }
-      .reel-title{ white-space:normal; }
+      .reel-caption{ flex-direction:column; align-items:center; text-align:center; }
+      .reel-title{ white-space:normal; text-align:center; }
     }
   </style>
 </head>
@@ -996,6 +1044,7 @@
       <div class="menu-item">
         <a class="menu-trigger" href="kontakt.html">Kontakt</a>
         <div class="menu-dropdown" role="menu">
+          <a href="kontakt.html">Kontakt</a>
           <a href="impressum.html">Impressum</a>
           <a href="datenschutz.html">Datenschutz</a>
         </div>
@@ -1163,7 +1212,7 @@
 
   <section id="work" aria-labelledby="work-heading">
     <div class="container">
-      <h2 id="work-heading" class="h3" style="text-transform:uppercase; letter-spacing:.18em; margin-bottom:1.6rem; text-align:center;">Examples</h2>
+      <h2 id="work-heading" class="h3" style="text-transform:uppercase; letter-spacing:.25em; margin-bottom:1.6rem; text-align:center; font-size:2rem;">Examples</h2>
       <p class="muted" style="text-align:center; margin-bottom:2rem;">
         Die hier gezeigten Referenzen sind nur ein paar speziell ausgewählte Produktionen, die bewusst aus unterschiedlichen Branchen stammen.
       </p>
@@ -1339,7 +1388,6 @@
     const p = new Vimeo.Player(iframe);
     vimeoPlayers.set(iframe, p);
 
-    // Debug / Sichtbarer Grund bei Embedding-Block (Konsole öffnen)
     try{
       p.on('error', (err) => {
         const id = iframe?.dataset?.vimeoId || '(unknown)';
@@ -1358,7 +1406,6 @@
       return `${base}?background=1&autoplay=1&muted=1&loop=1&${common}`;
     }
 
-    // Thumbs: background=1 => cover-fill, autoplay wird per Hover gestartet
     return `${base}?background=1&autoplay=0&muted=0&loop=1&${common}`;
   }
 
@@ -1502,32 +1549,27 @@
     });
     if (!introBtn) startExperience();
 
-    // Jahr im Footer
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// E-Mail Obfuscation: Anzeige verschleiert, Mailto erst bei Klick
-(function(){
-  const el = document.getElementById("email-footer");
-  if (!el) return;
-
-  // Sichtbarer Text (kein Klartext für Bots)
-  el.textContent = "info [at] takeonepictures [dot] com";
-
-  // Echte Adresse erst beim Klick zusammensetzen
-  el.addEventListener("click", function (e) {
-    e.preventDefault();
-    const parts = ["info", "takeonepictures", "com"];
-    const email = `${parts[0]}@${parts[1]}.${parts[2]}`;
-    window.location.href = `mailto:${email}`;
-  });
-})();
+    (function(){
+      const el = document.getElementById("email-footer");
+      if (!el) return;
+      el.textContent = "info [at] takeonepictures [dot] com";
+      el.addEventListener("click", function (e) {
+        e.preventDefault();
+        const parts = ["info", "takeonepictures", "com"];
+        const email = `${parts[0]}@${parts[1]}.${parts[2]}`;
+        window.location.href = `mailto:${email}`;
+      });
+    })();
 
     const header = document.querySelector('header');
     const hero = document.querySelector('.hero');
     const menuToggle = document.querySelector('.menu-toggle');
     const menuPanel = document.querySelector('.menu-panel');
     const panelLinks = menuPanel ? menuPanel.querySelectorAll('a') : [];
+    const menuItems = document.querySelectorAll('.menu-item');
 
     markHeroPlayingFast();
 
@@ -1562,10 +1604,72 @@
         if (!header) return;
         header.classList.remove('menu-open');
         if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+        closeAllMenuDropdowns();
       });
     });
 
-    /* Reel Slider (Bilder) */
+    function isTouchNav(){
+      return window.matchMedia('(max-width: 640px)').matches || window.matchMedia('(hover: none)').matches;
+    }
+
+    function closeAllMenuDropdowns(){
+      menuItems.forEach(item => {
+        item.classList.remove('is-open');
+        const dropdown = item.querySelector('.menu-dropdown');
+        if (dropdown){
+          dropdown.classList.remove('is-mobile');
+          dropdown.style.top = '';
+          dropdown.style.left = '';
+          dropdown.style.minWidth = '';
+        }
+      });
+    }
+
+    menuItems.forEach(item => {
+      const trigger = item.querySelector('.menu-trigger');
+      const dropdown = item.querySelector('.menu-dropdown');
+      if (!trigger || !dropdown) return;
+
+      trigger.addEventListener('click', (event) => {
+        if (!isTouchNav()) return;
+        event.preventDefault();
+        const wasOpen = item.classList.contains('is-open');
+        closeAllMenuDropdowns();
+        if (wasOpen) return;
+        item.classList.add('is-open');
+        dropdown.classList.add('is-mobile');
+        const rect = trigger.getBoundingClientRect();
+        const horizontalPadding = 12;
+        const dropdownWidth = Math.max(rect.width, 180);
+        let left = rect.left;
+        if (left + dropdownWidth + horizontalPadding > window.innerWidth){
+          left = window.innerWidth - dropdownWidth - horizontalPadding;
+        }
+        left = Math.max(horizontalPadding, left);
+        dropdown.style.top = `${rect.bottom + 6}px`;
+        dropdown.style.left = `${left}px`;
+        dropdown.style.minWidth = `${dropdownWidth}px`;
+      });
+
+      item.addEventListener('mouseenter', () => {
+        if (isTouchNav()) return;
+        dropdown.classList.remove('is-mobile');
+        dropdown.style.top = '';
+        dropdown.style.left = '';
+        dropdown.style.minWidth = '';
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!header) return;
+      if (header.contains(event.target)) return;
+      closeAllMenuDropdowns();
+    });
+
+    window.addEventListener('resize', () => {
+      if (!isTouchNav()) closeAllMenuDropdowns();
+    });
+
     const reelTrack = document.querySelector('.reel-track');
     const reelSlides = reelTrack ? reelTrack.querySelectorAll('.reel-slide') : [];
     const reelPrev = document.querySelector('.reel-prev');
@@ -1573,6 +1677,13 @@
     const reelTitleEl = document.getElementById('reel-title');
 
     const reelTitles = Array.from(reelSlides).map(slide => slide.getAttribute('data-title') || '');
+    const reelImageData = Array.from(reelSlides).map(slide => {
+      const img = slide.querySelector('.reel-media');
+      return {
+        src: img ? img.getAttribute('src') : '',
+        title: slide.getAttribute('data-title') || (img ? img.getAttribute('alt') : '') || 'Behind the scenes'
+      };
+    });
     let reelIndex = 0;
 
     function updateReel(delta = 0){
@@ -1588,7 +1699,13 @@
     if (reelNext) reelNext.addEventListener('click', () => updateReel(1));
     updateReel(0);
 
-    /* Picture Slider (Hamburg City Serienpilot) */
+    reelSlides.forEach((slide, idx) => {
+      slide.addEventListener('click', () => {
+        if (!reelImageData.length) return;
+        openSliderModal(idx, reelImageData);
+      });
+    });
+
     (function(){
       const images = sliderImages;
       if (!images.length) return;
@@ -1622,7 +1739,6 @@
       render();
     })();
 
-    /* Modal: Video + Bild */
     const modal = document.getElementById('player-modal');
     const modalTitle = document.getElementById('modal-title');
     const modalVimeo = document.getElementById('modal-vimeo');
@@ -1631,6 +1747,7 @@
     const modalPrev = document.querySelector('.modal-prev');
     const modalNext = document.querySelector('.modal-next');
     let modalSliderIndex = null;
+    let modalSliderSource = null;
 
     function openVimeo(vimeoId, title) {
       if (!mediaActivated) activateAllMedia();
@@ -1643,8 +1760,6 @@
       modalImage.src = '';
 
       modalVimeo.style.display = 'block';
-
-      // Spielt nach Interaktion mit aktivem Ton
       modalVimeo.src = `https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=0&loop=0&title=0&byline=0&portrait=0&dnt=1&playsinline=1&autopause=0`;
 
       modal.classList.remove('hidden');
@@ -1670,17 +1785,19 @@
       modal.classList.remove('hidden');
     }
 
-    function openSliderModal(startIndex = 0){
-      if (!sliderImages.length) return;
-      modalSliderIndex = (startIndex + sliderImages.length) % sliderImages.length;
-      const current = sliderImages[modalSliderIndex];
+    function openSliderModal(startIndex = 0, sourceImages = sliderImages){
+      const activeImages = (Array.isArray(sourceImages) && sourceImages.length) ? sourceImages : sliderImages;
+      if (!activeImages.length) return;
+      modalSliderSource = activeImages;
+      modalSliderIndex = (startIndex + modalSliderSource.length) % modalSliderSource.length;
+      const current = modalSliderSource[modalSliderIndex];
       openImage(current.src, current.title || SLIDER_DEFAULT_TITLE, { sliderMode:true });
     }
 
     function stepModalSlider(delta){
-      if (modalSliderIndex === null || !sliderImages.length) return;
-      modalSliderIndex = (modalSliderIndex + delta + sliderImages.length) % sliderImages.length;
-      const current = sliderImages[modalSliderIndex];
+      if (modalSliderIndex === null || !modalSliderSource || !modalSliderSource.length) return;
+      modalSliderIndex = (modalSliderIndex + delta + modalSliderSource.length) % modalSliderSource.length;
+      const current = modalSliderSource[modalSliderIndex];
       modalTitle.textContent = current.title || SLIDER_DEFAULT_TITLE;
       if (modalImage) modalImage.src = current.src;
     }
@@ -1689,6 +1806,7 @@
       modalVimeo.src = '';
       modalImage.src = '';
       modalSliderIndex = null;
+      modalSliderSource = null;
       modal.classList.remove('has-image-slider');
       modal.classList.add('hidden');
     }
@@ -1710,7 +1828,7 @@
         if (type === 'image-slider') {
           const currentIndex = parseInt(tile.getAttribute('data-current-index') || '0', 10);
           if (sliderImages.length && !Number.isNaN(currentIndex)){
-            openSliderModal(currentIndex);
+            openSliderModal(currentIndex, sliderImages);
           } else {
             const full = tile.getAttribute('data-full');
             if (full) openImage(full, title);
