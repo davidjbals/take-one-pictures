@@ -1003,12 +1003,22 @@
       .reel-arrow{ width:38px; height:38px; }
     }
 
-    @media(max-width:640px){
-      .cards{grid-template-columns:1fr}
-      .about-grid{grid-template-columns:1fr}
+@media(max-width:640px){
+  .cards{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
 
-      .nav{gap:.4rem;}
-      .brand{font-size:.78rem; letter-spacing:.14em;}
+  body{
+    background:#020617;
+  }
+
+  header{
+    backdrop-filter:none;
+    background:transparent;
+    border-bottom:none;
+  }
+
+  .nav{gap:.4rem;}
+  .brand{font-size:.78rem; letter-spacing:.14em;}
       .menu-inline{
         gap:.7rem;
         padding-bottom:.15rem;
@@ -1594,7 +1604,13 @@
       });
     }
 
-    if (introBtn) introBtn.addEventListener('click', startExperience);
+    if (introBtn){
+      introBtn.addEventListener('click', startExperience);
+      introBtn.addEventListener('touchstart', (event) => {
+        event.preventDefault();
+        startExperience();
+      }, { passive:false });
+    }
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !introFinished) startExperience();
     });
