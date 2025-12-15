@@ -193,18 +193,14 @@
       font-variant-numeric:tabular-nums;
     }
 
-    @keyframes loaderSpin{
-      to{ transform:rotate(360deg); }
-    }
-
     /* ===========================
        NAV / HEADER (FIXED LAYERING)
        =========================== */
     header{
       position:fixed;
       top:0;left:0;right:0;
-      z-index:5000;          /* FIX: höher als Hero/Vimeo */
-      isolation:isolate;     /* FIX: saubere Stacking-Context trotz backdrop-filter */
+      z-index:5000;
+      isolation:isolate;
       background:transparent;
       backdrop-filter:saturate(160%) blur(18px);
       border-bottom:none;
@@ -235,6 +231,7 @@
       color:#f9fafb;
       text-shadow:0 1px 6px rgba(0,0,0,0.7);
       transition:color .22s ease, text-shadow .22s ease;
+      white-space:nowrap;
     }
 
     .menu-inline{
@@ -252,6 +249,7 @@
       color:#f9fafb;
       text-shadow:0 1px 6px rgba(0,0,0,0.9);
       transition:background .18s ease,color .18s ease, box-shadow .18s ease, text-shadow .18s ease;
+      white-space:nowrap;
     }
 
     .menu-inline a:hover{
@@ -260,21 +258,44 @@
       box-shadow:0 14px 35px rgba(0,0,0,.8);
     }
 
-    .menu-item{ position:relative; }
-    .menu-trigger{
-      display:inline-flex;
+    .menu-dots{
+      position:relative;
+      display:flex;
       align-items:center;
-      gap:.25rem;
     }
 
-    .menu-dropdown{
+    .menu-dots button{
+      border:none;
+      background:rgba(15,23,42,0.25);
+      color:#f9fafb;
+      border-radius:999px;
+      padding:.32rem .85rem;
+      font-weight:700;
+      letter-spacing:.35em;
+      cursor:pointer;
+      transition:background .18s ease, box-shadow .18s ease;
+      font-size:.75rem;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:.35rem;
+    }
+
+    .menu-dots button:hover,
+    .menu-dots button:focus-visible{
+      background:rgba(15,23,42,0.95);
+      box-shadow:0 14px 35px rgba(0,0,0,.8);
+      color:#f9fafb;
+    }
+
+    .menu-dots-menu{
       position:absolute;
-      top:100%;
+      top:calc(100% + 6px);
       right:0;
-      min-width:180px;
+      min-width:170px;
       background:#ffffff;
       border:1px solid rgba(229,231,235,1);
-      border-radius:16px;
+      border-radius:14px;
       box-shadow:0 18px 40px rgba(15,23,42,.2);
       display:flex;
       flex-direction:column;
@@ -282,41 +303,39 @@
       pointer-events:none;
       transform:translateY(-6px);
       transition:opacity .18s ease, transform .18s ease;
-      z-index:6000;          /* FIX: Dropdown immer über allem */
+      z-index:60;
     }
 
-    .menu-dropdown.is-mobile{
-      position:fixed;
-      top:auto;
-      left:auto;
-      right:auto;
-      transform:none;
-      z-index:9000;          /* FIX: Mobile Dropdown noch über Header */
+    .menu-dots-icon{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+    .menu-dots-icon span{
+      width:4px;
+      height:4px;
+      border-radius:50%;
+      background:#f9fafb;
+      display:block;
     }
 
-    .menu-dropdown a{
+    .menu-dots-menu a{
+      padding:.6rem 1rem;
       font-size:.72rem;
       letter-spacing:.18em;
       text-transform:uppercase;
-      padding:.65rem 1rem;
       color:#0f172a;
-      text-shadow:none;
       border-bottom:1px solid rgba(229,231,235,1);
+      text-shadow:none;
     }
+    .menu-dots-menu a:last-child{ border-bottom:none; }
 
-    .menu-dropdown a:last-child{ border-bottom:none; }
-    .menu-dropdown a:hover{
-      background:rgba(15,23,42,0.06);
+    .menu-dots-menu a:hover{
+      background:rgba(15,23,42,0.08);
       color:#0f172a;
     }
 
-    .menu-item:hover .menu-dropdown{
-      opacity:1;
-      pointer-events:auto;
-      transform:translateY(0);
-    }
-
-    .menu-item.is-open .menu-dropdown{
+    .menu-dots.is-open .menu-dots-menu{
       opacity:1;
       pointer-events:auto;
       transform:translateY(0);
@@ -396,6 +415,7 @@
       padding:.6rem .2rem;
       border-bottom:1px solid rgba(229,231,235,1);
       color:#0f172a;
+      white-space:nowrap;
     }
     .menu-panel a:last-child{ border-bottom:none; }
 
@@ -420,7 +440,7 @@
       margin-top:0;
       padding:0;
       background:#020617;
-      z-index:0; /* FIX: hero bleibt unter header */
+      z-index:0;
     }
 
     .hero::after{
@@ -473,6 +493,7 @@
       text-transform:uppercase;
       transition:background .18s ease,color .18s ease,border-color .18s ease, box-shadow .18s ease, transform .18s ease;
       box-shadow:0 18px 45px rgba(0,0,0,.8);
+      white-space:nowrap;
     }
 
     .cta:hover{
@@ -487,7 +508,7 @@
     .hero-vimeo{
       position:absolute;
       inset:0;
-      z-index:0; /* FIX: bleibt unten */
+      z-index:0;
       pointer-events:none;
       overflow:hidden;
       background:#020617;
@@ -502,7 +523,7 @@
       transform:scale(1.06);
       filter:contrast(1.05) saturate(1.05);
       transition:opacity .55s ease;
-      z-index:-1; /* FIX: Poster sicher hinter allem */
+      z-index:-1;
     }
 
     .hero-vimeo iframe{
@@ -514,7 +535,7 @@
       width:max(100%, calc(100vh * 16 / 9));
       height:max(100%, calc(100vw * 9 / 16));
       border:0;
-      z-index:-2; /* FIX: Iframe immer hinter Header/Dropdown */
+      z-index:-2;
       opacity:0;
       transition:opacity .35s ease;
     }
@@ -710,7 +731,7 @@
       box-shadow:0 26px 80px rgba(15,23,42,.18);
     }
 
-    /* Vimeo thumbs: COVER im 4:3 Kasten (16:9 Inhalte werden sauber gefüllt) */
+    /* Vimeo thumbs */
     .thumb .thumb-vimeo{
       position:absolute;
       top:50%;
@@ -802,6 +823,7 @@
       letter-spacing:.18em;
       text-transform:uppercase;
       margin-bottom:.4rem;
+      white-space:nowrap;
     }
 
     #contact{
@@ -869,6 +891,7 @@
       font-weight:700;
       letter-spacing:.12em;
       text-transform:uppercase;
+      white-space:nowrap;
     }
 
     .modal-close{
@@ -1001,6 +1024,30 @@
         padding:.25rem .55rem;
         white-space:nowrap;
       }
+
+      .menu-dots{
+        position:static;
+      }
+      .menu-dots button{
+        letter-spacing:.4em;
+      }
+      .menu-dots-menu{
+        position:fixed;
+        top:70px;
+        left:50%;
+        right:auto;
+        transform:translateX(-50%);
+        min-width:min(320px, calc(100vw - 32px));
+        width:auto;
+        z-index:5000;
+        opacity:0;
+        pointer-events:none;
+      }
+      .menu-dots.is-open .menu-dots-menu{
+        opacity:1;
+        pointer-events:auto;
+      }
+
       .menu-toggle{display:none;}
       header.nav-compact .menu-toggle{display:none;}
 
@@ -1041,10 +1088,13 @@
     <nav class="menu-inline">
       <a href="#work">Projekte</a>
       <a href="#about">Über uns</a>
-      <div class="menu-item">
-        <a class="menu-trigger" href="kontakt.html">Kontakt</a>
-        <div class="menu-dropdown" role="menu">
-          <a href="kontakt.html">Kontakt</a>
+      <a href="kontakt.html">Kontakt</a>
+      <div class="menu-dots">
+        <button type="button" aria-haspopup="true" aria-expanded="false">
+          <span class="menu-dots-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="visually-hidden">Mehr</span>
+        </button>
+        <div class="menu-dots-menu" role="menu">
           <a href="impressum.html">Impressum</a>
           <a href="datenschutz.html">Datenschutz</a>
         </div>
@@ -1351,6 +1401,7 @@
 </div>
 
 <script>
+  /* redeploy-marker: 2025-12-15 */
   let mediaActivated = false;
   const vimeoPlayers = new Map();
   const HERO_READY_TIMEOUT = 5000;
@@ -1569,7 +1620,6 @@
     const menuToggle = document.querySelector('.menu-toggle');
     const menuPanel = document.querySelector('.menu-panel');
     const panelLinks = menuPanel ? menuPanel.querySelectorAll('a') : [];
-    const menuItems = document.querySelectorAll('.menu-item');
 
     markHeroPlayingFast();
 
@@ -1604,71 +1654,38 @@
         if (!header) return;
         header.classList.remove('menu-open');
         if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
-        closeAllMenuDropdowns();
       });
     });
 
-    function isTouchNav(){
-      return window.matchMedia('(max-width: 640px)').matches || window.matchMedia('(hover: none)').matches;
+    const dotsMenu = document.querySelector('.menu-dots');
+    const dotsButton = dotsMenu ? dotsMenu.querySelector('button') : null;
+    const dotsLinks = dotsMenu ? dotsMenu.querySelectorAll('.menu-dots-menu a') : [];
+
+    function closeDotsMenu(){
+      if (!dotsMenu || !dotsButton) return;
+      dotsMenu.classList.remove('is-open');
+      dotsButton.setAttribute('aria-expanded', 'false');
     }
 
-    function closeAllMenuDropdowns(){
-      menuItems.forEach(item => {
-        item.classList.remove('is-open');
-        const dropdown = item.querySelector('.menu-dropdown');
-        if (dropdown){
-          dropdown.classList.remove('is-mobile');
-          dropdown.style.top = '';
-          dropdown.style.left = '';
-          dropdown.style.minWidth = '';
-        }
-      });
-    }
-
-    menuItems.forEach(item => {
-      const trigger = item.querySelector('.menu-trigger');
-      const dropdown = item.querySelector('.menu-dropdown');
-      if (!trigger || !dropdown) return;
-
-      trigger.addEventListener('click', (event) => {
-        if (!isTouchNav()) return;
+    if (dotsButton && dotsMenu){
+      dotsButton.addEventListener('click', (event) => {
         event.preventDefault();
-        const wasOpen = item.classList.contains('is-open');
-        closeAllMenuDropdowns();
-        if (wasOpen) return;
-        item.classList.add('is-open');
-        dropdown.classList.add('is-mobile');
-        const rect = trigger.getBoundingClientRect();
-        const horizontalPadding = 12;
-        const dropdownWidth = Math.max(rect.width, 180);
-        let left = rect.left;
-        if (left + dropdownWidth + horizontalPadding > window.innerWidth){
-          left = window.innerWidth - dropdownWidth - horizontalPadding;
-        }
-        left = Math.max(horizontalPadding, left);
-        dropdown.style.top = `${rect.bottom + 6}px`;
-        dropdown.style.left = `${left}px`;
-        dropdown.style.minWidth = `${dropdownWidth}px`;
+        const isOpen = dotsMenu.classList.toggle('is-open');
+        dotsButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       });
 
-      item.addEventListener('mouseenter', () => {
-        if (isTouchNav()) return;
-        dropdown.classList.remove('is-mobile');
-        dropdown.style.top = '';
-        dropdown.style.left = '';
-        dropdown.style.minWidth = '';
+      dotsLinks.forEach(link => {
+        link.addEventListener('click', () => closeDotsMenu());
       });
-    });
 
-    document.addEventListener('click', (event) => {
-      if (!header) return;
-      if (header.contains(event.target)) return;
-      closeAllMenuDropdowns();
-    });
+      document.addEventListener('click', (event) => {
+        if (!dotsMenu.contains(event.target)) closeDotsMenu();
+      });
 
-    window.addEventListener('resize', () => {
-      if (!isTouchNav()) closeAllMenuDropdowns();
-    });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeDotsMenu();
+      });
+    }
 
     const reelTrack = document.querySelector('.reel-track');
     const reelSlides = reelTrack ? reelTrack.querySelectorAll('.reel-slide') : [];
