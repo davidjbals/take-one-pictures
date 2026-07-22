@@ -698,6 +698,38 @@
 
     #work .tile:hover{ transform:translateY(-4px); }
 
+    .tile-featured{
+      grid-column:1 / -1;
+    }
+
+    .tile-featured .thumb{
+      aspect-ratio:16/7;
+    }
+
+    .tile-badge{
+      position:absolute;
+      top:1.1rem;
+      left:1.1rem;
+      z-index:4;
+      background:var(--fg);
+      color:#fff;
+      font-size:.72rem;
+      font-weight:600;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      padding:.5rem .9rem;
+      border-radius:999px;
+      pointer-events:none;
+    }
+
+    .tile-featured .project-title{
+      font-size:1.5rem;
+    }
+
+    @media (max-width:640px){
+      .tile-featured .thumb{ aspect-ratio:4/3; }
+    }
+
     .thumb{
       position:relative;
       aspect-ratio:4/3;
@@ -1362,7 +1394,7 @@
       <img class="hero-poster" src="assets/521264.jpg" alt="" aria-hidden="true" />
       <iframe
         id="vimeo-hero"
-        src="https://player.vimeo.com/video/1201440544?background=1&autoplay=1&muted=1&loop=1&byline=0&title=0&portrait=0&dnt=1&playsinline=1&autopause=0"
+        src="https://player.vimeo.com/video/1212097517?background=1&autoplay=1&muted=1&loop=1&byline=0&title=0&portrait=0&dnt=1&playsinline=1&autopause=0"
         frameborder="0"
         allow="autoplay; fullscreen; picture-in-picture"
         allowfullscreen
@@ -1416,9 +1448,6 @@
               <img class="reel-media" src="assets/625731.jpg" alt="Behind the scenes" loading="lazy" />
             </div>
             <div class="reel-slide" data-title="Behind the scenes">
-              <img class="reel-media" src="assets/626177.jpg" alt="Behind the scenes" loading="lazy" />
-            </div>
-            <div class="reel-slide" data-title="Behind the scenes">
               <img class="reel-media" src="assets/521452.jpg" alt="Behind the scenes" loading="lazy" />
             </div>
             <div class="reel-slide" data-title="Behind the scenes">
@@ -1464,8 +1493,9 @@
       <!-- Panel: Spielfilm -->
       <div class="cards cat-panel is-active" id="cat-panel-spielfilm" role="tabpanel" data-cat="spielfilm">
 
-        <article class="tile" data-role="project" data-type="image-slider" data-project="hamburg-city" data-category="fiktion" data-full="assets/hc1.jpg">
+        <article class="tile tile-featured" data-role="project" data-type="image-slider" data-project="hamburg-city" data-category="fiktion" data-full="assets/hc1.jpg">
           <div class="thumb">
+            <span class="tile-badge">Aktuelles Projekt</span>
             <img class="thumb-img" src="assets/hc1.jpg" alt="Hamburg City - Serienpilot" loading="lazy" />
             <button class="slider-arrow slider-prev" type="button" aria-label="Vorheriges Bild">‹</button>
             <button class="slider-arrow slider-next" type="button" aria-label="Nächstes Bild">›</button>
