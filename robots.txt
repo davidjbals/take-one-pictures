@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://takeonepictures.de/sitemap.xml
