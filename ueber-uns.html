@@ -39,7 +39,7 @@
       { "@type": "Person", "name": "David Bals", "jobTitle": "Produzent" }
     ],
     "employee": [
-      { "@type": "Person", "name": "Rio Kwesi", "jobTitle": "Produktionsassistenz" },
+      { "@type": "Person", "name": "Rio Kwesi", "jobTitle": "Writer" },
       { "@type": "Person", "name": "Teref Salih", "jobTitle": "Produktionsassistenz" },
       { "@type": "Person", "name": "Cem Graf", "jobTitle": "Casting Agent" }
     ]
@@ -237,6 +237,10 @@
       transition:transform .5s ease;
     }
 
+    .person-img-top{
+      object-position:center 25%;
+    }
+
     .person-img-wrap:hover img{
       transform:scale(1.045);
     }
@@ -358,8 +362,14 @@
       color:#6b7280;
     }
 
-    .footer-contact a{color:#6b7280;}
+    .footer-contact a{color:#6b7280;display:inline-flex;align-items:center;gap:.4em;}
     .footer-contact a:hover{color:#0f172a;}
+
+    .icon-ig{
+      width:14px;
+      height:14px;
+      flex-shrink:0;
+    }
 
     .footer-bar{
       display:flex;
@@ -424,7 +434,7 @@
       <div class="people">
         <article class="anim-fade-up" style="--anim-delay:.05s">
           <div class="person-img-wrap">
-            <img src="assets/Ramon_Wolber.jpg" alt="Ramón Wolber, Produzent bei TakeOne Pictures" />
+            <img class="person-img-top" src="assets/Ramon_Wolber.jpg" alt="Ramón Wolber, Produzent bei TakeOne Pictures" />
           </div>
           <h3 class="person-name">Ramón Wolber</h3>
           <span class="person-role">Produzent</span>
@@ -443,9 +453,10 @@
           <h3 class="person-name">Paul Kilgus</h3>
           <span class="person-role">Produzent</span>
           <p class="person-desc">
-            Paul Kilgus ist ein in Berlin lebender Filmemacher mit dem Ziel, eine rohe Handschrift für neues europäisches Genrekino zu entwickeln.
-            Nach seinem Abschluss an der Idyllwild Arts Academy realisierte er Kurzfilme wie Opa, Gerechtigkeit ist blind und Rauch im Wind.
-            Aktuell entwickelt er die Serie Hamburg City, die von zwei Freunden aus dem Kiez erzählt, deren Traum vom Rap-Stardom sie auf einen riskanten, illegalen Weg treibt.
+            Paul Kilgus ist ein in Berlin lebender Writer und Director mit dem Ziel, eine rohe Handschrift für neues europäisches Genrekino zu entwickeln.
+            Nach seinem Abschluss an der Idyllwild Arts Academy arbeitete er bei Kinofilmproduktionen der Rohfilm Factory GmbH und der Augenschein Filmproduktion GmbH.
+            Außerdem schrieb er mehrere Spielfilmdrehbücher und realisierte Kurzfilme wie "Opa", "Gerechtigkeit ist Blind" und "Rauch im Wind".
+            Aktuell realisiert er die Serie "Hamburg City" als Show Runner.
           </p>
         </article>
 
@@ -464,10 +475,10 @@
 
         <article class="anim-fade-up" style="--anim-delay:.28s">
           <div class="person-img-wrap">
-            <img src="assets/Rio_kwesi.jpg" alt="Rio Kwesi, Produktionsassistenz bei TakeOne Pictures" />
+            <img src="assets/Rio_kwesi.jpg" alt="Rio Kwesi, Writer bei TakeOne Pictures" />
           </div>
           <h3 class="person-name">Rio Kwesi</h3>
-          <span class="person-role">Produktionsassistenz</span>
+          <span class="person-role">Writer</span>
           <p class="person-desc">
             Rio Kwesi ist gebürtiger Hamburger und arbeitet als Filmemacher und Schauspieler in Berlin.
             Obwohl das Schreiben den bisher dominantesten Part in seiner Karriere hinter der Kamera spielt, ist der Deutsch-Franzose besonders in eigenen Projekten auch als Regisseur und Produzent tätig.
@@ -527,7 +538,10 @@
     </div>
     <div class="footer-contact">
       <a href="#" id="email-footer">info@takeonepictures.com</a>
-      <a href="https://instagram.com/take_one_pictures_" target="_blank" rel="noopener">@take_one_pictures_</a>
+      <a href="https://instagram.com/take_one_pictures_" target="_blank" rel="noopener">
+        <svg class="icon-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor" stroke="none"/></svg>
+        @take_one_pictures_
+      </a>
     </div>
     <div class="footer-bar">
       © <span id="year"></span> TakeOne • <a href="impressum.html">Impressum</a> • <a href="datenschutz.html">Datenschutz</a>
