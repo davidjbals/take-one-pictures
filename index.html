@@ -832,7 +832,7 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      transition:background .16s ease, transform .16s ease;
+      transition:background .16s ease, transform .16s ease, opacity .25s ease;
     }
     .slider-arrow:hover{
       background:rgba(15,23,42,0.95);
@@ -840,6 +840,96 @@
     }
     .slider-prev{ left:12px; }
     .slider-next{ right:12px; }
+
+    /* ---- Info-Button + Text-Overlay auf den Projektbildern ---- */
+    .info-btn{
+      position:absolute;
+      top:12px;
+      right:12px;
+      width:34px;
+      height:34px;
+      border:none;
+      border-radius:999px;
+      background:rgba(15,23,42,0.72);
+      color:#f9fafb;
+      font-family:var(--font);
+      font-size:15px;
+      font-weight:700;
+      line-height:1;
+      cursor:pointer;
+      z-index:7;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:background .16s ease, transform .16s ease;
+    }
+    .info-btn:hover{
+      background:rgba(15,23,42,0.95);
+      transform:scale(1.06);
+    }
+    .info-btn:focus-visible{
+      outline:2px solid #f9fafb;
+      outline-offset:2px;
+    }
+    .info-btn .icon-close{ display:none; }
+    .thumb.is-info-open .info-btn .icon-info{ display:none; }
+    .thumb.is-info-open .info-btn .icon-close{ display:block; }
+
+    .thumb-info{
+      position:absolute;
+      inset:0;
+      z-index:6;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:2.4rem 1.6rem;
+      overflow-y:auto;
+      cursor:pointer;
+      opacity:0;
+      visibility:hidden;
+      background:rgba(2,6,23,.80);
+      transition:opacity .35s ease, visibility .35s ease;
+    }
+    @supports ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){
+      .thumb-info{
+        background:rgba(2,6,23,.58);
+        -webkit-backdrop-filter:blur(16px) saturate(.85);
+        backdrop-filter:blur(16px) saturate(.85);
+      }
+    }
+    .thumb.is-info-open .thumb-info{
+      opacity:1;
+      visibility:visible;
+    }
+    .thumb.is-info-open .slider-arrow{
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .thumb-info-text{
+      color:#f3f4f6;
+      font-size:clamp(.84rem, 1.05vw, 1rem);
+      line-height:1.65;
+      text-align:center;
+      max-width:48ch;
+      text-shadow:0 2px 18px rgba(0,0,0,.45);
+    }
+
+    .tile-featured .thumb-info-text{
+      font-size:clamp(.9rem, 1.15vw, 1.14rem);
+      max-width:58ch;
+    }
+
+    @media (max-width:640px){
+      .thumb-info{ padding:1.6rem 1.1rem; }
+      .thumb-info-text{ font-size:.82rem; line-height:1.55; }
+      .tile-featured .thumb-info-text{ font-size:.86rem; }
+      .info-btn{ width:32px; height:32px; top:10px; right:10px; }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      .thumb-info{ transition:none; }
+    }
 
     .body{ padding:1rem 0 0 0; }
 
@@ -1508,6 +1598,10 @@
             <img class="thumb-img" src="assets/hc1.jpg" alt="Hamburg City - Serienpilot" loading="lazy" />
             <button class="slider-arrow slider-prev" type="button" aria-label="Vorheriges Bild">‹</button>
             <button class="slider-arrow slider-next" type="button" aria-label="Nächstes Bild">›</button>
+            <button class="info-btn" type="button" aria-label="Info anzeigen" aria-expanded="false" aria-controls="info-hamburg-city"><span class="icon-info" aria-hidden="true">i</span><span class="icon-close" aria-hidden="true">×</span></button>
+            <div class="thumb-info" id="info-hamburg-city" aria-hidden="true">
+              <p class="thumb-info-text">Zwei Jungs aus Hamburgs Blocks träumen vom großen Durchbruch als Rapper. Zwischen Drogendeals, sketchy Labels und kaputten Beziehungen fallen sie immer tiefer in einen Strudel des Chaos.</p>
+            </div>
           </div>
           <div class="body">
             <h3 class="h3 project-title">Hamburg City - Serienpilot</h3>
@@ -1520,6 +1614,10 @@
             <img class="thumb-img" src="assets/01.jpg" alt="Rauch im Wind" loading="lazy" />
             <button class="slider-arrow slider-prev" type="button" aria-label="Vorheriges Bild">‹</button>
             <button class="slider-arrow slider-next" type="button" aria-label="Nächstes Bild">›</button>
+            <button class="info-btn" type="button" aria-label="Info anzeigen" aria-expanded="false" aria-controls="info-rauch-im-wind"><span class="icon-info" aria-hidden="true">i</span><span class="icon-close" aria-hidden="true">×</span></button>
+            <div class="thumb-info" id="info-rauch-im-wind" aria-hidden="true">
+              <p class="thumb-info-text">Nach dem Tod seines besten Freunds Lu erhält Eugene ein Angebot von der mysteriösen Wissenschaftlerin Madame Charon, die ihm verspricht, mit ihrer VR-Brille seinen toten Freund zu sehen, sodass er einen ungeklärten Streit aufarbeiten kann.</p>
+            </div>
           </div>
           <div class="body">
             <h3 class="h3 project-title">Rauch im Wind</h3>
@@ -1532,6 +1630,10 @@
             <img class="thumb-img" src="assets/gib1.jpg" alt="Gerechtigkeit ist blind" loading="lazy" />
             <button class="slider-arrow slider-prev" type="button" aria-label="Vorheriges Bild">‹</button>
             <button class="slider-arrow slider-next" type="button" aria-label="Nächstes Bild">›</button>
+            <button class="info-btn" type="button" aria-label="Info anzeigen" aria-expanded="false" aria-controls="info-gerechtigkeit-ist-blind"><span class="icon-info" aria-hidden="true">i</span><span class="icon-close" aria-hidden="true">×</span></button>
+            <div class="thumb-info" id="info-gerechtigkeit-ist-blind" aria-hidden="true">
+              <p class="thumb-info-text">Ibrahim wird von einem rassistischen Polizisten ermordet, woraufhin eine maskierte Gruppe den Mann konfrontiert, der für seinen Tod verantwortlich war. Sie streiten über seine gerechte Strafe und wie weit Selbstjustiz gehen darf.</p>
+            </div>
           </div>
           <div class="body">
             <h3 class="h3 project-title">Gerechtigkeit ist blind</h3>
@@ -1544,6 +1646,10 @@
             <img class="thumb-img" src="assets/opa1.jpg" alt="Opa" loading="lazy" />
             <button class="slider-arrow slider-prev" type="button" aria-label="Vorheriges Bild">‹</button>
             <button class="slider-arrow slider-next" type="button" aria-label="Nächstes Bild">›</button>
+            <button class="info-btn" type="button" aria-label="Info anzeigen" aria-expanded="false" aria-controls="info-opa"><span class="icon-info" aria-hidden="true">i</span><span class="icon-close" aria-hidden="true">×</span></button>
+            <div class="thumb-info" id="info-opa" aria-hidden="true">
+              <p class="thumb-info-text">In einem faschistischen Regime der Zukunft werden alte Menschen verhaftet und unter Drogen gestellt, sodass sie immer mehr den Bezug zur Realität verlieren. Frieda versucht verzweifelt, ein letztes Mal mit ihrem eigenen Opa zu sprechen.</p>
+            </div>
           </div>
           <div class="body">
             <h3 class="h3 project-title">Opa</h3>
@@ -1556,6 +1662,10 @@
             <img class="thumb-img" src="assets/sdv1.jpg" alt="Schatten der Vergangenheit" loading="lazy" />
             <button class="slider-arrow slider-prev" type="button" aria-label="Vorheriges Bild">‹</button>
             <button class="slider-arrow slider-next" type="button" aria-label="Nächstes Bild">›</button>
+            <button class="info-btn" type="button" aria-label="Info anzeigen" aria-expanded="false" aria-controls="info-schatten-der-vergangenheit"><span class="icon-info" aria-hidden="true">i</span><span class="icon-close" aria-hidden="true">×</span></button>
+            <div class="thumb-info" id="info-schatten-der-vergangenheit" aria-hidden="true">
+              <p class="thumb-info-text">Ein junger Boxer erbt vom Tod seines Bruders nichts als Schulden bei zwielichtigen Männern, die keine Ausreden akzeptieren. Je verzweifelter er versucht, sie abzuarbeiten, desto tiefer gerät er in einen Kreislauf aus Gewalt, Verrat und Rache.</p>
+            </div>
           </div>
           <div class="body">
             <h3 class="h3 project-title">Schatten der Vergangenheit</h3>
@@ -2086,6 +2196,51 @@
       if (next) next.addEventListener('click', (e) => { e.stopPropagation(); step(1); });
 
       render();
+    });
+
+    /* ---- Info-Overlay auf den Projektbildern ---- */
+    function setInfoPanel(thumb, open){
+      if (!thumb) return;
+      const btn = thumb.querySelector('.info-btn');
+      const panel = thumb.querySelector('.thumb-info');
+      thumb.classList.toggle('is-info-open', open);
+      if (btn){
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.setAttribute('aria-label', open ? 'Info schließen' : 'Info anzeigen');
+      }
+      if (panel) panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+    }
+
+    function closeAllInfoPanels(except){
+      document.querySelectorAll('.thumb.is-info-open').forEach(t => {
+        if (t !== except) setInfoPanel(t, false);
+      });
+    }
+
+    document.querySelectorAll('article.tile[data-role="project"] .info-btn').forEach(btn => {
+      const thumb = btn.closest('.thumb');
+      if (!thumb) return;
+      const panel = thumb.querySelector('.thumb-info');
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const willOpen = !thumb.classList.contains('is-info-open');
+        closeAllInfoPanels(thumb);
+        setInfoPanel(thumb, willOpen);
+      });
+
+      if (panel){
+        panel.addEventListener('click', (e) => {
+          e.stopPropagation();
+          setInfoPanel(thumb, false);
+        });
+      }
+
+      setInfoPanel(thumb, false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeAllInfoPanels();
     });
 
     const modal = document.getElementById('player-modal');
